@@ -9,6 +9,7 @@ import SignedOut from '../pages/auth/SignedOut';
 import Dashboard from '../pages/dashboard/Index';
 import Profile from '../pages/dashboard/Profile';
 import ProtectedRoute from '../components/ProtectedRoute';
+import DebugBackend from '../pages/DebugBackend';
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
       { path: 'signin', element: <SignIn /> },
       { path: 'callback', element: <Callback /> },
       { path: 'signed-out', element: <SignedOut /> },
+      { path: 'debug', element: <DebugBackend /> },
 
       {
         path: 'dashboard',
