@@ -1,0 +1,6 @@
+[
+  { "Key": "app", "Value": "crushline" },
+  { "Key": "env", "Value": "{envName}" },
+  { "Key": "owner", "Value": "ross" },
+  { "Key": "cost-center", "Value": "events" }
+]
