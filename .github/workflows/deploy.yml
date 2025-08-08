@@ -8,7 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Amplify deployment
+        shell: bash
         run: |
-          curl -X POST -H "Content-Type: application/json" -d '{}' "$AMPLIFY_WEBHOOK_URL"
+          if [ -z "${AMPLIFY_WEBHOOK_URL}" ]; then
+            echo "Missing AMPLIFY_WEBHOOK_URL secret"; exit 1
+          fi
+          # strip any accidental CR/LF
+          URL="${AMPLIFY_WEBHOOK_URL//$'\r'/}"
+          URL="${URL//$'\n'/}"
+          echo "::notice::Webhook URL length=${#URL}"
+          curl -sS -X POST -H 'Content-Type: application/json' -d '{}' "$URL"
         env:
           AMPLIFY_WEBHOOK_URL: ${{ secrets.AMPLIFY_WEBHOOK_URL }}
