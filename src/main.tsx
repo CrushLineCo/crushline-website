@@ -3,13 +3,18 @@ import ReactDOM from 'react-dom/client'
 import App from './app/App'
 import './index.css'
 
-import outputs from '../amplify_outputs.json' // adjust path if amplify_outputs.json is at repo root
 import { Amplify } from 'aws-amplify'
+import { loadAmplifyOutputs } from './amplifyConfig'
 
-Amplify.configure(outputs)
+const root = ReactDOM.createRoot(document.getElementById('root')!);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+(async () => {
+  const outputs = await loadAmplifyOutputs();
+  Amplify.configure(outputs);
+
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+})();
